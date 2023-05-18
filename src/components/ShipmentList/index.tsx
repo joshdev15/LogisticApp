@@ -1,8 +1,9 @@
 import {View} from 'react-native';
-import {shipments} from '../../testData';
+import useAPI from '../../hooks/useAPI';
 import ShipmentCard from '../ShipmentCard';
 
 const ShipmentList = () => {
+  const {shipments} = useAPI();
   return (
     <View>
       {shipments.map(ship => (

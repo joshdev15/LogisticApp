@@ -5,12 +5,19 @@ import Section from '../../components/Section';
 import MainHeader from '../../components/MainHeader';
 import ViewTitle from '../../components/ViewTitle';
 import ShipmentList from '../../components/ShipmentList';
+import {useEffect} from 'react';
+import useAPI from '../../hooks/useAPI';
 
 const HomeScreen = () => {
+  const {welcome} = useAPI();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    welcome();
+  }, []);
 
   return (
     <ScrollView

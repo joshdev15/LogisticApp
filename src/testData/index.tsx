@@ -1,6 +1,6 @@
 import {IShipment, EStatus} from '../models';
 
-export const shipments: IShipment[] = [
+export const shipmentsData: IShipment[] = [
   {
     id: (Math.random() * 100000).toString(),
     name: 'Primera',

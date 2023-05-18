@@ -6,34 +6,30 @@ import Section from '../../components/Section';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import ViewTitle from '../../components/ViewTitle';
 import {ROUTES} from '../../constants/routes';
-import {shipments} from '../../testData';
 import AppText from '../../components/AppText';
 import styles from './styles';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
-
-// const getInfo = async () => {
-// try {
-// const res = await fetch('https://rickandmortyapi.com/api/character');
-// const json = await res.json();
-// console.log(json);
-// } catch (e) {
-// console.log(e);
-// }
-// };
-
-// useEffect(() => {
-// getInfo();
-// }, []);
+import useAPI from '../../hooks/useAPI';
+import {useEffect, useState} from 'react';
+import {IShipment} from '../../models';
 
 const DetailScreen = () => {
+  const {shipments} = useAPI();
   const {navigate} = useNavigation();
   const {params}: any = useRoute();
-  const currentShipment = shipments.find(ship => ship.id === params.id);
-  console.log(currentShipment);
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const [currentShipment, setCurrentShipment] = useState<IShipment>();
+
+  useEffect(() => {
+    if (shipments) {
+      const tmpShipment = shipments.find(ship => ship.id === params.id);
+      setCurrentShipment(tmpShipment);
+    }
+  }, [shipments]);
 
   if (!currentShipment) {
     return (

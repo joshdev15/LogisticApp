@@ -2,8 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   main: {
-    borderRadius: 20,
-    height: 200,
+    borderRadius: 10,
+    margin: 10,
+    height: 150,
     overflow: 'hidden',
   },
   image: {

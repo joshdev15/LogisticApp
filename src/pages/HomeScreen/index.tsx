@@ -1,14 +1,12 @@
 import {ScrollView, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppStatusBar from '../../components/AppStatusBar';
-import Button from '../../components/Button';
 import Section from '../../components/Section';
-import {useNavigation} from '@react-navigation/native';
 import MainHeader from '../../components/MainHeader';
 import ViewTitle from '../../components/ViewTitle';
+import ShipmentList from '../../components/ShipmentList';
 
 const HomeScreen = () => {
-  const {navigate} = useNavigation();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -22,7 +20,7 @@ const HomeScreen = () => {
         <MainHeader />
         <ViewTitle value="Home - Delivery List" />
         <AppStatusBar />
-        <Button text="To Detail" onPress={() => navigate('Details')} />
+        <ShipmentList />
       </Section>
     </ScrollView>
   );

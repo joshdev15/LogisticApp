@@ -7,10 +7,12 @@ import ViewTitle from '../../components/ViewTitle';
 import ShipmentList from '../../components/ShipmentList';
 import {useEffect} from 'react';
 import useAPI from '../../hooks/useAPI';
+import AuthModal from '../../components/AuthModal';
 
 const HomeScreen = () => {
   const {welcome} = useAPI();
   const isDarkMode = useColorScheme() === 'dark';
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -24,6 +26,8 @@ const HomeScreen = () => {
       contentInsetAdjustmentBehavior="automatic"
       style={backgroundStyle}>
       <Section>
+        <AuthModal />
+
         <MainHeader />
         <ViewTitle value="Home - Delivery List" />
         <AppStatusBar />

@@ -21,4 +21,6 @@ Crear los endpoins necesarios para el manejo de la data que provea el api (Back)
 
 Usar una solución en la nube para la rapida integración de los servicios en un mvp y luego manejarlo de forma mas especifica.
 
+<img src="./public/screenshot.png" width="100%">
+
 **La aplicación corre optimamente en ios y android**

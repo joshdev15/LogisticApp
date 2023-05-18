@@ -11,7 +11,7 @@ import Way from '../../assets/svg/way';
 import {useNavigation} from '@react-navigation/native';
 import {ROUTES} from '../../constants/routes';
 
-const currentIcon: any = {
+export const currentIcon: any = {
   ordered: <Ordered width={30} height={30} />,
   packaging: <Packaging width={30} height={30} />,
   way: <Way width={30} height={30} />,
@@ -24,7 +24,7 @@ interface IShipLine {
   value: string;
 }
 
-const ShipLine: FC<IShipLine> = ({keyValue, value}) => {
+export const ShipLine: FC<IShipLine> = ({keyValue, value}) => {
   return (
     <View style={styles.shipline}>
       <AppText text={`${keyValue}: `} style={styles.left} />
@@ -38,7 +38,7 @@ const ShipmentCard: FC<IShipment> = ship => {
   const {navigate} = useNavigation();
 
   const goToDetails = () => {
-    navigate(ROUTES.DETAILS, {params: ship.id});
+    navigate(ROUTES.DETAILS, {id: ship.id});
   };
 
   return (

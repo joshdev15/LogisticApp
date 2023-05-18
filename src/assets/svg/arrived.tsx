@@ -1,0 +1,57 @@
+import {FC} from 'react';
+import {SvgXml} from 'react-native-svg';
+import {ISize} from '../../models';
+
+const xml = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="150"
+   height="150"
+   viewBox="0 0 3 3"
+   version="1.1"
+   id="svg135"
+   sodipodi:docname="arrived.svg"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs139" />
+  <sodipodi:namedview
+     id="namedview137"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="2.36"
+     inkscape:cx="36.652542"
+     inkscape:cy="79.025424"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg135" />
+  <rect
+     width="3"
+     height="3"
+     id="icon-bound"
+     fill="none"
+     x="0"
+     y="0"
+     style="stroke-width:0.1875" />
+  <path
+     d="m 1.5,0.21395062 c -0.52908704,0 -0.95849102,0.42940398 -0.95849102,0.95849098 C 0.54150898,2.1309327 1.5,2.7699267 1.5,2.7699267 c 0,0 0.958491,-0.638994 0.958491,-1.5974851 0,-0.529087 -0.429404,-0.95849098 -0.958491,-0.95849098 z m 0,1.27798808 c -0.2645436,0 -0.4792455,-0.214702 -0.4792455,-0.4792456 0,-0.26454348 0.2147019,-0.47924547 0.4792455,-0.47924547 0.2645435,0 0.4792455,0.21470199 0.4792455,0.47924547 0,0.2645436 -0.214702,0.4792456 -0.4792455,0.4792456 z"
+     id="path133"
+     style="fill:#ff0000;stroke:#1a1a1a;stroke-width:0.159749" />
+</svg>`;
+
+const Arrived: FC<ISize> = ({width, height}) => {
+  return <SvgXml width={width} height={height} xml={xml} />;
+};
+
+export default Arrived;

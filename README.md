@@ -12,10 +12,9 @@ Inicialmente se pensó en manejar un repositorio independiente para el backend s
 
 ## Cosas por finalizar:
 
-Integracíon del Mapa (App).
-Integración de Mongo con el api rest en Node (Back).
-Manejo del login (App).
-Crear los endpoins necesarios para el manejo de la data que provea el api (Back).
+- Integración de Mongo con el api rest en Node (Back).
+- Manejo del login (App).
+- Crear los endpoins necesarios para el manejo de la data que provea el api (Back).
 
 ## Necesario
 

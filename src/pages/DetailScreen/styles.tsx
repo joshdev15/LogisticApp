@@ -2,19 +2,20 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   mapzone: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mapCont: {
     width: '100%',
     height: 300,
     backgroundColor: '#c0c0c020',
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
     overflow: 'hidden',
   },
-
   lineCont: {
     padding: 10,
   },
-
   statusCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',

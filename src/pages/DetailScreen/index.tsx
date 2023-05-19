@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {ScrollView, useColorScheme, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppStatusBar from '../../components/AppStatusBar';
@@ -9,18 +10,29 @@ import {ROUTES} from '../../constants/routes';
 import AppText from '../../components/AppText';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
-import MapView, {Marker, Callout} from 'react-native-maps';
+import MapView, {Marker, Polyline} from 'react-native-maps';
 import styles from './styles';
+
+const initialRegion = {
+  latitude: 4.702429,
+  longitude: -74.0440309,
+  latitudeDelta: 0.07,
+  longitudeDelta: 0.07,
+};
 
 const DetailScreen = () => {
   const {currentShipment} = useAPI();
+  const [region, setRegion] = useState(initialRegion);
   const {navigate} = useNavigation();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const goToHome = () => navigate(ROUTES.HOME);
+  const goToHome = () => {
+    navigate(ROUTES.HOME);
+    setRegion(initialRegion);
+  };
 
   if (!currentShipment) {
     return (
@@ -31,6 +43,15 @@ const DetailScreen = () => {
     );
   }
 
+  useEffect(() => {
+    setRegion({
+      latitude: currentShipment.location.lat,
+      longitude: currentShipment.location.lng,
+      latitudeDelta: 0.07,
+      longitudeDelta: 0.07,
+    });
+  }, [currentShipment]);
+
   const status = currentShipment.status.toString();
 
   return (
@@ -39,27 +60,46 @@ const DetailScreen = () => {
       style={backgroundStyle}>
       <AppStatusBar />
       <View style={styles.mapzone}>
-        <MapView
-          style={{width: '100%', height: '100%'}}
-          initialRegion={{
-            latitude: 4.702104,
-            longitude: -74.040982,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}>
-          <Callout>
+        <View style={styles.mapCont}>
+          <MapView
+            style={{width: '100%', height: '100%'}}
+            userInterfaceStyle={isDarkMode ? 'dark' : 'light'}
+            zoomControlEnabled
+            region={region}>
             <Marker
               coordinate={{
                 latitude: currentShipment.location.lat,
                 longitude: currentShipment.location.lng,
               }}
             />
-          </Callout>
-        </MapView>
+
+            <Marker
+              coordinate={{
+                latitude: currentShipment.destination.lat,
+                longitude: currentShipment.destination.lng,
+              }}
+            />
+
+            <Polyline
+              coordinates={[
+                {
+                  latitude: currentShipment.location.lat,
+                  longitude: currentShipment.location.lng,
+                },
+                {
+                  latitude: currentShipment.destination.lat,
+                  longitude: currentShipment.destination.lng,
+                },
+              ]}
+              strokeColor="#000"
+              strokeWidth={10}
+            />
+          </MapView>
+        </View>
       </View>
 
       <Section>
-        <ViewTitle value={`Details of ${currentShipment.id}`} />
+        <ViewTitle value={`Details of ${currentShipment.name}`} />
         <View style={styles.lineCont}>
           <ShipLine keyValue="Author" value={currentShipment.author} />
           <ShipLine keyValue="Owner" value={currentShipment.owner} />

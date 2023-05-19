@@ -9,8 +9,12 @@ export const shipmentsData: IShipment[] = [
     owner: 'Sr. Uno',
     cost: 50.5,
     location: {
-      lat: -74.0445442,
-      lng: 4.7022765,
+      lat: 4.711863,
+      lng: -74.0739219,
+    },
+    destination: {
+      lat: 4.702429,
+      lng: -74.0440309,
     },
     status: EStatus.ordered,
   },
@@ -21,8 +25,12 @@ export const shipmentsData: IShipment[] = [
     owner: 'Sr. Dos',
     cost: 50.5,
     location: {
-      lat: -74.0445442,
-      lng: 4.7022765,
+      lat: 4.711863,
+      lng: -74.0739219,
+    },
+    destination: {
+      lat: 4.702429,
+      lng: -74.0440309,
     },
     status: EStatus.packaging,
   },
@@ -33,8 +41,12 @@ export const shipmentsData: IShipment[] = [
     owner: 'Sr. Dos',
     cost: 50.5,
     location: {
-      lat: -74.0445442,
-      lng: 4.7022765,
+      lat: 4.711863,
+      lng: -74.0739219,
+    },
+    destination: {
+      lat: 4.702429,
+      lng: -74.0440309,
     },
     status: EStatus.way,
   },
@@ -45,8 +57,12 @@ export const shipmentsData: IShipment[] = [
     owner: 'Sr. Dos',
     cost: 50.5,
     location: {
-      lat: -74.0445442,
-      lng: 4.7022765,
+      lat: 4.711863,
+      lng: -74.0739219,
+    },
+    destination: {
+      lat: 4.702429,
+      lng: -74.0440309,
     },
     status: EStatus.arrived,
   },
@@ -57,8 +73,12 @@ export const shipmentsData: IShipment[] = [
     owner: 'Sr. Dos',
     cost: 50.5,
     location: {
-      lat: -74.0445442,
-      lng: 4.7022765,
+      lat: 4.711863,
+      lng: -74.0739219,
+    },
+    destination: {
+      lat: 4.702429,
+      lng: -74.0440309,
     },
     status: EStatus.delivered,
   },

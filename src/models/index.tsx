@@ -19,6 +19,7 @@ export interface IShipment {
   owner: string;
   cost: number;
   location: ILocation;
+  destination: ILocation;
   status: EStatus;
   id: string;
 }

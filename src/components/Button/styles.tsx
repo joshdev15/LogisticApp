@@ -12,6 +12,18 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textTransform: 'uppercase',
   },
+  btnDisabled: {
+    backgroundColor: '#c0c0c090',
+    margin: 10,
+    padding: 10,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  txtDisabled: {
+    color: 'black',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
 });
 
 export default styles;

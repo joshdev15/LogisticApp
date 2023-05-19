@@ -17,6 +17,16 @@ Integración de Mongo con el api rest en Node (Back).
 Manejo del login (App).
 Crear los endpoins necesarios para el manejo de la data que provea el api (Back).
 
+## Necesario
+
+Debes crear el archivo .env y colocar las siguientes variables
+
+```
+API=http://localhost:9876
+MAP_API_KEY=YourApiKey
+
+```
+
 ## Aspectos que podría mejorar la aplicación
 
 Usar una solución en la nube para la rapida integración de los servicios en un mvp y luego manejarlo de forma mas especifica.

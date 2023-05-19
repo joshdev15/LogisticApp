@@ -1,4 +1,9 @@
-import {ScrollView, useColorScheme, View} from 'react-native';
+import {
+  ScrollView,
+  useColorScheme,
+  View,
+  PermissionsAndroid,
+} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppStatusBar from '../../components/AppStatusBar';
 import Button from '../../components/Button';
@@ -12,6 +17,9 @@ import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
 import {useEffect, useState} from 'react';
 import {IShipment} from '../../models';
+import MapView from 'react-native-maps';
+import {Marker} from 'react-native-svg';
+import Arrived from '../../assets/svg/arrived';
 
 const DetailScreen = () => {
   const {shipments} = useAPI();
@@ -20,6 +28,28 @@ const DetailScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'This app needs access to your location.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the location');
+      } else {
+        console.log('Location permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   const [currentShipment, setCurrentShipment] = useState<IShipment>();
@@ -41,15 +71,29 @@ const DetailScreen = () => {
 
   const status = currentShipment.status.toString();
 
+  requestLocationPermission();
+
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={backgroundStyle}>
       <AppStatusBar />
       <View style={styles.mapzone}>
-        <AppText text="Map Zone" />
-        <AppText text={`Latitude: ${currentShipment.location.lat}`} />
-        <AppText text={`Longitude: ${currentShipment.location.lng}`} />
+        <MapView
+          style={{width: '100%', height: '100%'}}
+          initialRegion={{
+            latitude: 4.702104,
+            longitude: -74.040982,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}>
+          <Marker
+            coordinate={{
+              latitude: currentShipment.location.lat,
+              longitude: currentShipment.location.lng,
+            }}
+          />
+        </MapView>
       </View>
 
       <Section>

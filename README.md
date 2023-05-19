@@ -24,3 +24,7 @@ Usar una solución en la nube para la rapida integración de los servicios en un
 <img src="./public/screenshot.png" width="100%">
 
 **La aplicación corre optimamente en ios y android**
+
+para el backend ver: https://github.com/joshdev15/LogisticBack
+
+en la rama joshua

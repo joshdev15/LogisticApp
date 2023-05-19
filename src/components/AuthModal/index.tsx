@@ -1,6 +1,7 @@
 import {ChangeEvent, useEffect, useState} from 'react';
 import {
   Modal,
+  View,
   ScrollView,
   TouchableOpacity,
   useColorScheme,
@@ -50,6 +51,9 @@ const AuthModal = () => {
         <Section>
           <ViewTitle value="Login" />
           <MainHeader />
+          <View style={styles.warning}>
+            <AppText text='Temporaly you only can login with user "admin" and the passwork "admin"' />
+          </View>
 
           <Field
             value={user}

@@ -1,27 +1,7 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-  FC,
-  ReactElement,
-} from 'react';
-import {IShipment} from '../models';
+import {createContext, useState, FC} from 'react';
+import {IApiContext, IContext, IShipment} from '../models';
 import {shipmentsData} from '../testData';
 import {encode} from 'base-64';
-
-export interface IContext {
-  children: ReactElement;
-}
-
-export interface IApiContext {
-  shipments: IShipment[];
-  setShipments: Dispatch<SetStateAction<IShipment[]>>;
-  welcome: any;
-  auth: any;
-  isLogin: boolean;
-  forceAuth: any;
-}
 
 export const ApiContext = createContext<IApiContext>({
   shipments: [],
@@ -30,6 +10,8 @@ export const ApiContext = createContext<IApiContext>({
   auth: async () => {},
   isLogin: false,
   forceAuth: async () => {},
+  currentShipment: undefined,
+  setCurrentShipment: () => {},
 });
 
 const API_URL = 'http://localhost:9876';
@@ -37,6 +19,9 @@ const API_URL = 'http://localhost:9876';
 const ApiProvider: FC<IContext> = ({children}) => {
   const [shipments, setShipments] = useState(shipmentsData);
   const [isLogin, setLogin] = useState(false);
+  const [currentShipment, setCurrentShipment] = useState<
+    IShipment | undefined
+  >();
 
   // API Call
   const welcome = async () => {
@@ -85,6 +70,8 @@ const ApiProvider: FC<IContext> = ({children}) => {
         auth,
         isLogin,
         forceAuth,
+        currentShipment,
+        setCurrentShipment,
       }}>
       {children}
     </ApiContext.Provider>

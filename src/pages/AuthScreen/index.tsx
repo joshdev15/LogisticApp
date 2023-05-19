@@ -9,10 +9,9 @@ import {useEffect} from 'react';
 import useAPI from '../../hooks/useAPI';
 import AuthModal from '../../components/AuthModal';
 
-const HomeScreen = () => {
+const AuthScreen = () => {
   const {welcome} = useAPI();
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -36,4 +35,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default AuthScreen;

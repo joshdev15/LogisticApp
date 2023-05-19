@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '600',
   },
+  emptyState: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;

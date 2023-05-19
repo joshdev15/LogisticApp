@@ -1,6 +1,8 @@
+import {ReactElement, Dispatch, SetStateAction} from 'react';
+
 export interface ILocation {
-  lat: string | number;
-  lng: string | number;
+  lat: number;
+  lng: number;
 }
 
 export enum EStatus {
@@ -24,4 +26,19 @@ export interface IShipment {
 export interface ISize {
   width: string | number;
   height: string | number;
+}
+
+export interface IContext {
+  children: ReactElement;
+}
+
+export interface IApiContext {
+  shipments: IShipment[];
+  setShipments: Dispatch<SetStateAction<IShipment[]>>;
+  welcome: any;
+  auth: any;
+  isLogin: boolean;
+  forceAuth: any;
+  currentShipment: IShipment | undefined;
+  setCurrentShipment: Dispatch<SetStateAction<IShipment | undefined>>;
 }

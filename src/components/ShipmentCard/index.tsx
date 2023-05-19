@@ -10,6 +10,7 @@ import Packaging from '../../assets/svg/packaging';
 import Way from '../../assets/svg/way';
 import {useNavigation} from '@react-navigation/native';
 import {ROUTES} from '../../constants/routes';
+import useAPI from '../../hooks/useAPI';
 
 export const currentIcon: any = {
   ordered: <Ordered width={30} height={30} />,
@@ -34,11 +35,13 @@ export const ShipLine: FC<IShipLine> = ({keyValue, value}) => {
 };
 
 const ShipmentCard: FC<IShipment> = ship => {
+  const {setCurrentShipment} = useAPI();
   const status = ship.status.toString();
   const {navigate} = useNavigation();
 
   const goToDetails = () => {
-    navigate(ROUTES.DETAILS, {id: ship.id});
+    setCurrentShipment(ship);
+    navigate(ROUTES.DETAILS);
   };
 
   return (

@@ -8,6 +8,7 @@ import {
 } from 'react';
 import {IShipment} from '../models';
 import {shipmentsData} from '../testData';
+import {encode} from 'base-64';
 
 export interface IContext {
   children: ReactElement;
@@ -48,9 +49,16 @@ const ApiProvider: FC<IContext> = ({children}) => {
     }
   };
 
-  const auth = async () => {
+  const auth = async (user: string, pass: string) => {
+    const tmpfmt = encode(`${user}:${pass}`);
+    console.log(tmpfmt);
+
     try {
-      const res = await fetch(`${API_URL}/api/fakeauth`);
+      const res = await fetch(`${API_URL}/api/fakeauth`, {
+        headers: {
+          Authorization: `Basic ${tmpfmt}`,
+        },
+      });
       console.log(res);
       const json = await res.json();
       console.log(json);

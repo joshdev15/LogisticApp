@@ -35,11 +35,17 @@ export const ShipLine: FC<IShipLine> = ({keyValue, value}) => {
 };
 
 const ShipmentCard: FC<IShipment> = ship => {
-  const {setCurrentShipment} = useAPI();
+  const {setCurrentShipment, locationPermissions, requestLocationPermissions} =
+    useAPI();
   const status = ship.status.toString();
   const {navigate} = useNavigation();
 
   const goToDetails = () => {
+    if (!locationPermissions) {
+      requestLocationPermissions();
+      return;
+    }
+
     setCurrentShipment(ship);
     navigate(ROUTES.DETAILS);
   };

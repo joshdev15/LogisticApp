@@ -1,7 +1,9 @@
 import {createContext, useState, FC} from 'react';
+import {Platform} from 'react-native';
 import {IApiContext, IContext, IShipment} from '../models';
 import {shipmentsData} from '../testData';
 import {encode} from 'base-64';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 export const ApiContext = createContext<IApiContext>({
   shipments: [],
@@ -12,6 +14,8 @@ export const ApiContext = createContext<IApiContext>({
   forceAuth: async () => {},
   currentShipment: undefined,
   setCurrentShipment: () => {},
+  locationPermissions: false,
+  requestLocationPermissions: () => {},
 });
 
 const API_URL = 'http://localhost:9876';
@@ -19,6 +23,7 @@ const API_URL = 'http://localhost:9876';
 const ApiProvider: FC<IContext> = ({children}) => {
   const [shipments, setShipments] = useState(shipmentsData);
   const [isLogin, setLogin] = useState(false);
+  const [locationPermissions, setLocationPermissions] = useState(false);
   const [currentShipment, setCurrentShipment] = useState<
     IShipment | undefined
   >();
@@ -61,6 +66,21 @@ const ApiProvider: FC<IContext> = ({children}) => {
     }
   };
 
+  const requestLocationPermissions = async () => {
+    try {
+      const granted = await request(
+        Platform.OS === 'ios'
+          ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+          : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+      );
+
+      console.log('granted status', granted === 'granted');
+      setLocationPermissions(granted === 'granted');
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -72,6 +92,8 @@ const ApiProvider: FC<IContext> = ({children}) => {
         forceAuth,
         currentShipment,
         setCurrentShipment,
+        locationPermissions,
+        requestLocationPermissions,
       }}>
       {children}
     </ApiContext.Provider>

@@ -11,7 +11,7 @@ const MainRouter = () => {
   return (
     <ApiProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AuthScreen">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Auth"
             component={AuthScreen}

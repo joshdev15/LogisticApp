@@ -42,4 +42,6 @@ export interface IApiContext {
   forceAuth: any;
   currentShipment: IShipment | undefined;
   setCurrentShipment: Dispatch<SetStateAction<IShipment | undefined>>;
+  locationPermissions: boolean;
+  requestLocationPermissions: any;
 }

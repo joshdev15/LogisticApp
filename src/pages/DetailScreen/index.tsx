@@ -50,6 +50,8 @@ const DetailScreen = () => {
       latitudeDelta: 0.07,
       longitudeDelta: 0.07,
     });
+
+    return () => {};
   }, [currentShipment]);
 
   const status = currentShipment.status.toString();

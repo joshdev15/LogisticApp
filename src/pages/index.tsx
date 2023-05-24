@@ -10,7 +10,7 @@ const MainRouter = () => {
   return (
     <ApiProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="home">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Home"
             component={HomeScreen}

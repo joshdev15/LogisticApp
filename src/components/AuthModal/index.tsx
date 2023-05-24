@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   Modal,
   View,
@@ -36,8 +36,6 @@ const AuthModal = () => {
   };
 
   useEffect(() => {
-    console.log('fieldValues', user, pass);
-
     if (![''].includes(user) && ![''].includes(pass)) {
       setDisabled(false);
     }

@@ -1,77 +1,60 @@
-import {
-  ScrollView,
-  useColorScheme,
-  View,
-  PermissionsAndroid,
-} from 'react-native';
+import {useEffect, useState} from 'react';
+import {ScrollView, useColorScheme, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppStatusBar from '../../components/AppStatusBar';
 import Button from '../../components/Button';
 import Section from '../../components/Section';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import ViewTitle from '../../components/ViewTitle';
 import {ROUTES} from '../../constants/routes';
 import AppText from '../../components/AppText';
-import styles from './styles';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
-import {useEffect, useState} from 'react';
-import {IShipment} from '../../models';
-import MapView from 'react-native-maps';
-import {Marker} from 'react-native-svg';
-import Arrived from '../../assets/svg/arrived';
+import MapView, {Marker, Polyline} from 'react-native-maps';
+import styles from './styles';
+
+const initialRegion = {
+  latitude: 4.702429,
+  longitude: -74.0440309,
+  latitudeDelta: 0.07,
+  longitudeDelta: 0.07,
+};
 
 const DetailScreen = () => {
-  const {shipments} = useAPI();
+  const {currentShipment} = useAPI();
+  const [region, setRegion] = useState(initialRegion);
   const {navigate} = useNavigation();
-  const {params}: any = useRoute();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message: 'This app needs access to your location.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the location');
-      } else {
-        console.log('Location permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
+  const goToHome = () => {
+    navigate(ROUTES.HOME);
+    setRegion(initialRegion);
   };
-
-  const [currentShipment, setCurrentShipment] = useState<IShipment>();
-
-  useEffect(() => {
-    if (shipments) {
-      const tmpShipment = shipments.find(ship => ship.id === params.id);
-      setCurrentShipment(tmpShipment);
-    }
-  }, [shipments]);
 
   if (!currentShipment) {
     return (
-      <View>
+      <View style={{...backgroundStyle, ...styles.emptyState}}>
         <AppText text={"We can't find this shipment, sorry..."} />
+        <Button text="Back" onPress={goToHome} />
       </View>
     );
   }
 
-  const status = currentShipment.status.toString();
+  useEffect(() => {
+    setRegion({
+      latitude: currentShipment.location.lat,
+      longitude: currentShipment.location.lng,
+      latitudeDelta: 0.07,
+      longitudeDelta: 0.07,
+    });
 
-  requestLocationPermission();
+    return () => {};
+  }, [currentShipment]);
+
+  const status = currentShipment.status.toString();
 
   return (
     <ScrollView
@@ -79,21 +62,42 @@ const DetailScreen = () => {
       style={backgroundStyle}>
       <AppStatusBar />
       <View style={styles.mapzone}>
-        <MapView
-          style={{width: '100%', height: '100%'}}
-          initialRegion={{
-            latitude: 4.702104,
-            longitude: -74.040982,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}>
-          <Marker
-            coordinate={{
-              latitude: currentShipment.location.lat,
-              longitude: currentShipment.location.lng,
-            }}
-          />
-        </MapView>
+        <View style={styles.mapCont}>
+          <MapView
+            style={{width: '100%', height: '100%'}}
+            userInterfaceStyle={isDarkMode ? 'dark' : 'light'}
+            zoomControlEnabled
+            region={region}>
+            <Marker
+              coordinate={{
+                latitude: currentShipment.location.lat,
+                longitude: currentShipment.location.lng,
+              }}
+            />
+
+            <Marker
+              coordinate={{
+                latitude: currentShipment.destination.lat,
+                longitude: currentShipment.destination.lng,
+              }}
+            />
+
+            <Polyline
+              coordinates={[
+                {
+                  latitude: currentShipment.location.lat,
+                  longitude: currentShipment.location.lng,
+                },
+                {
+                  latitude: currentShipment.destination.lat,
+                  longitude: currentShipment.destination.lng,
+                },
+              ]}
+              strokeColor="#000"
+              strokeWidth={10}
+            />
+          </MapView>
+        </View>
       </View>
 
       <Section>
@@ -108,7 +112,7 @@ const DetailScreen = () => {
           </View>
         </View>
 
-        <Button text="Back" onPress={() => navigate(ROUTES.HOME)} />
+        <Button text="Back" onPress={goToHome} />
       </Section>
     </ScrollView>
   );

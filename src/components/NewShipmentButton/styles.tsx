@@ -4,23 +4,20 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -50,
+    alignItems: 'flex-end',
+    padding: 10,
+  },
+  text: {
+    paddingRight: 10,
   },
   button: {
     backgroundColor: '#42C2FF',
-    width: 75,
-    height: 75,
+    width: 150,
+    height: 30,
     borderRadius: 50,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowRadius: 10,
-    shadowOpacity: 0.4,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
   },
 });
 

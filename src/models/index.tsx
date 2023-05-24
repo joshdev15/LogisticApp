@@ -44,4 +44,6 @@ export interface IApiContext {
   setCurrentShipment: Dispatch<SetStateAction<IShipment | undefined>>;
   locationPermissions: boolean;
   requestLocationPermissions: any;
+  addShipment: any;
+  getAllShipments: any;
 }

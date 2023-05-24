@@ -1,20 +1,22 @@
 import {FC} from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import Ship from '../../assets/svg/ship';
 import AppText from '../AppText';
 import styles from './styles';
 
-interface ICenterButton {
+interface INewShipmentButton {
   onPress: () => void;
 }
 
-const CenterButton: FC<ICenterButton> = ({onPress}) => {
+const NewShipmentButton: FC<INewShipmentButton> = ({onPress}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress} style={styles.button}>
-        <AppText text={'X'} />
+        <AppText text="New Shipment" style={styles.text} />
+        <Ship width={20} height={20} />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default CenterButton;
+export default NewShipmentButton;

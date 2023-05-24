@@ -14,6 +14,8 @@ const useAPI = () => {
     setCurrentShipment,
     locationPermissions,
     requestLocationPermissions,
+    addShipment,
+    getAllShipments,
   } = useContext<IApiContext>(ApiContext);
 
   return {
@@ -27,6 +29,8 @@ const useAPI = () => {
     setCurrentShipment,
     locationPermissions,
     requestLocationPermissions,
+    addShipment,
+    getAllShipments,
   };
 };
 

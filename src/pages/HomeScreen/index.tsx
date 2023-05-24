@@ -8,7 +8,7 @@ import ShipmentList from '../../components/ShipmentList';
 import {useEffect, useState} from 'react';
 import useAPI from '../../hooks/useAPI';
 import AuthModal from '../../components/AuthModal';
-import CenterButton from '../../components/CenterButton';
+import NewShipmentButton from '../../components/NewShipmentButton';
 import ShipmentModal from '../../components/ShipmentModal';
 
 const HomeScreen = () => {
@@ -34,11 +34,11 @@ const HomeScreen = () => {
       <Section>
         <AuthModal />
         <MainHeader />
-        <CenterButton onPress={openModal} />
-        <ShipmentModal open={show} setOpen={closeModal} />
         <ViewTitle value="Home - Delivery List" />
+        <NewShipmentButton onPress={openModal} />
         <AppStatusBar />
         <ShipmentList />
+        <ShipmentModal open={show} closeModal={closeModal} />
       </Section>
     </ScrollView>
   );

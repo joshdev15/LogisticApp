@@ -8,16 +8,37 @@ const styles = StyleSheet.create({
     borderColor: '#42C2FF',
     borderRadius: 10,
   },
-  statusCont: {
+  titleCont: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    marginBottom: 3,
+  },
+  titleAndAuthorCont: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginBottom: 3,
+  },
+  statusCont: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
     marginTop: 5,
   },
   statusTxt: {
     fontSize: 8,
     textTransform: 'uppercase',
     fontWeight: '600',
+  },
+  authorCont: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  authorTxt: {
+    fontSize: 10.5,
+    color: 'grey',
   },
   lineCont: {
     width: '100%',
@@ -35,7 +56,7 @@ const styles = StyleSheet.create({
   },
   name: {
     marginBottom: 5,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '300',
   },
   left: {

@@ -13,11 +13,11 @@ import {ROUTES} from '../../constants/routes';
 import useAPI from '../../hooks/useAPI';
 
 export const currentIcon: any = {
-  ordered: <Ordered width={30} height={30} />,
-  packaging: <Packaging width={30} height={30} />,
-  way: <Way width={30} height={30} />,
-  arrived: <Arrived width={30} height={30} />,
-  delivered: <Done width={30} height={30} />,
+  ordered: <Ordered width={25} height={25} />,
+  packaging: <Packaging width={25} height={25} />,
+  way: <Way width={25} height={25} />,
+  arrived: <Arrived width={25} height={25} />,
+  delivered: <Done width={25} height={25} />,
 };
 
 interface IShipLine {
@@ -52,17 +52,24 @@ const ShipmentCard: FC<IShipment> = ship => {
 
   return (
     <TouchableOpacity style={styles.ship} onPress={goToDetails}>
-      <AppText text={ship.name} style={styles.name} />
+      <View style={styles.titleCont}>
+        <View style={styles.titleAndAuthorCont}>
+          <AppText text={ship.name} style={styles.name} />
+          <View style={styles.authorCont}>
+            <AppText text={'Author: '} style={styles.authorTxt} />
+            <AppText text={ship.author} style={styles.authorTxt} />
+          </View>
+        </View>
 
-      <View style={styles.lineCont}>
-        <ShipLine keyValue="Author" value={ship.author} />
-        <ShipLine keyValue="Owner" value={ship.owner} />
-        <ShipLine keyValue="Cost" value={`${ship.cost}`} />
+        <View style={styles.statusCont}>
+          <AppText text={status} style={styles.statusTxt} />
+          {currentIcon[status]}
+        </View>
       </View>
 
-      <View style={styles.statusCont}>
-        <AppText text={`Status: ${status}`} style={styles.statusTxt} />
-        {currentIcon[status]}
+      <View style={styles.lineCont}>
+        <ShipLine keyValue="Owner" value={ship.owner} />
+        <ShipLine keyValue="Cost" value={`${ship.cost}`} />
       </View>
     </TouchableOpacity>
   );

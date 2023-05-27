@@ -11,8 +11,9 @@ import AppText from '../../components/AppText';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
 import MapView, {Marker, Polyline} from 'react-native-maps';
-import WayLogo from '../../assets/images/way.png';
+import WayLogo from '../../assets/images/truck.png';
 import styles from './styles';
+import {ILocation} from '../../models';
 
 const initialRegion = {
   latitude: 4.702429,
@@ -56,6 +57,16 @@ const DetailScreen = () => {
   }, [currentShipment]);
 
   const status = currentShipment.status.toString();
+  const {origin, location, destination} = currentShipment;
+  const markers = [
+    {name: 'origin', latitude: origin.lat, longitude: origin.lng},
+    {name: 'location', latitude: location.lat, longitude: location.lng},
+    {
+      name: 'destination',
+      latitude: destination.lat,
+      longitude: destination.lng,
+    },
+  ];
 
   return (
     <ScrollView
@@ -69,6 +80,18 @@ const DetailScreen = () => {
             userInterfaceStyle={isDarkMode ? 'dark' : 'light'}
             zoomControlEnabled
             region={region}>
+            {markers.map(mark => {
+              const {name, latitude, longitude} = mark;
+              return (
+                <Marker
+                  key={name}
+                  coordinate={{latitude, longitude}}
+                  {...(name === 'location' && {icon: WayLogo, image: WayLogo})}
+                />
+              );
+            })}
+
+            {/*
             <Marker
               coordinate={{
                 latitude: currentShipment.origin.lat,
@@ -91,6 +114,7 @@ const DetailScreen = () => {
                 longitude: currentShipment.destination.lng,
               }}
             />
+            */}
 
             <Polyline
               coordinates={[
@@ -104,7 +128,7 @@ const DetailScreen = () => {
                 },
               ]}
               strokeColor="#000"
-              strokeWidth={10}
+              strokeWidth={8}
             />
           </MapView>
         </View>

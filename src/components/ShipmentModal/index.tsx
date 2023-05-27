@@ -100,6 +100,10 @@ const ShipmentModal: FC<IShipmentModal> = ({open, closeModal}) => {
       name,
       owner,
       cost: parseFloat(cost),
+      origin: {
+        lat: 4.711863,
+        lng: -74.0739219,
+      },
       location: {
         lat: 4.711863,
         lng: -74.0739219,

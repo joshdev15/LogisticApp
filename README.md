@@ -12,9 +12,11 @@ Inicialmente se pensó en manejar un repositorio independiente para el backend s
 
 ## Cosas por finalizar:
 
-- Integración de Mongo con el api rest en Node (Back).
-- Manejo del login (App).
-- Crear los endpoins necesarios para el manejo de la data que provea el api (Back).
+- [x] Integración de Mongo con el api rest en Node (Back).
+
+- [x] Manejo del login (App).
+
+- [x] Crear los endpoins necesarios para el manejo de la data que provea el api (Back).
 
 ## Necesario
 
@@ -30,7 +32,7 @@ MAP_API_KEY=YourApiKey
 
 Usar una solución en la nube para la rapida integración de los servicios en un mvp y luego manejarlo de forma mas especifica.
 
-<img src="./public/screenshot.png" width="100%">
+<img src="./public/screenshot-1.png" width="100%">
 
 **La aplicación corre optimamente en ios y android**
 

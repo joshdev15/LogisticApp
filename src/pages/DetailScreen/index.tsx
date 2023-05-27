@@ -11,6 +11,7 @@ import AppText from '../../components/AppText';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
 import MapView, {Marker, Polyline} from 'react-native-maps';
+import WayLogo from '../../assets/images/way.png';
 import styles from './styles';
 
 const initialRegion = {
@@ -70,9 +71,18 @@ const DetailScreen = () => {
             region={region}>
             <Marker
               coordinate={{
+                latitude: currentShipment.origin.lat,
+                longitude: currentShipment.origin.lng,
+              }}
+            />
+
+            <Marker
+              coordinate={{
                 latitude: currentShipment.location.lat,
                 longitude: currentShipment.location.lng,
               }}
+              icon={WayLogo}
+              image={WayLogo}
             />
 
             <Marker

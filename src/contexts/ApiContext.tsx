@@ -1,7 +1,6 @@
 import {createContext, useState, FC} from 'react';
 import {Platform} from 'react-native';
 import {IApiContext, IContext, IShipment} from '../models';
-// import {shipmentsData} from '../testData';
 import {encode} from 'base-64';
 import {request, PERMISSIONS} from 'react-native-permissions';
 
@@ -23,7 +22,7 @@ export const ApiContext = createContext<IApiContext>({
 const API_URL = 'http://localhost:9876';
 
 const ApiProvider: FC<IContext> = ({children}) => {
-  const [shipments, setShipments] = useState([]);
+  const [shipments, setShipments] = useState<IShipment[]>([]);
   const [isLogin, setLogin] = useState(false);
   const [apiIsConnected, setApiConnection] = useState(false);
   const [locationPermissions, setLocationPermissions] = useState(false);
@@ -34,13 +33,18 @@ const ApiProvider: FC<IContext> = ({children}) => {
   // API Call
   const welcome = async () => {
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(API_URL, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const json = await res.json();
       setApiConnection(true);
       console.log(json.msg);
       getAllShipments();
     } catch (e) {
-      console.log(e);
+      console.log(Platform.OS, e);
     }
   };
 
@@ -51,7 +55,7 @@ const ApiProvider: FC<IContext> = ({children}) => {
       const json = await res.json();
       setShipments(json.shipments);
     } catch (e) {
-      console.log(e);
+      console.log(Platform.OS, e);
     }
   };
 
@@ -59,15 +63,21 @@ const ApiProvider: FC<IContext> = ({children}) => {
     const tmpfmt = encode(`${user}:${pass}`);
 
     try {
+      console.log('Here 1');
+
       const res = await fetch(`${API_URL}/api/fakeauth`, {
         headers: {
           Authorization: `Basic ${tmpfmt}`,
         },
       });
+
+      console.log('Here 2');
       const json = await res.json();
       setLogin(json.auth);
+      console.log('Here 3');
     } catch (e) {
-      console.log(e);
+      console.log(Platform.OS, e);
+      console.log('Not Here');
     }
   };
 
@@ -75,7 +85,7 @@ const ApiProvider: FC<IContext> = ({children}) => {
     try {
       setLogin(true);
     } catch (e) {
-      console.log(e);
+      console.log(Platform.OS, e);
     }
   };
 
@@ -88,13 +98,13 @@ const ApiProvider: FC<IContext> = ({children}) => {
       );
 
       setLocationPermissions(granted === 'granted');
-    } catch (err) {
-      console.warn(err);
+    } catch (e) {
+      console.log(Platform.OS, e);
     }
   };
 
   const addShipment = async (shipment: IShipment) => {
-    const copy = [...shipments];
+    const copy: IShipment[] = [...shipments];
     copy.push(shipment);
     setShipments(copy);
 
@@ -107,7 +117,7 @@ const ApiProvider: FC<IContext> = ({children}) => {
 
         console.log('RES', res);
       } catch (e) {
-        console.log(e);
+        console.log(Platform.OS, e);
       }
     }
   };
@@ -126,6 +136,7 @@ const ApiProvider: FC<IContext> = ({children}) => {
         locationPermissions,
         requestLocationPermissions,
         addShipment,
+        getAllShipments,
       }}>
       {children}
     </ApiContext.Provider>

@@ -28,7 +28,7 @@ const NewShipmentButton: FC<INewShipmentButton> = ({onPress}) => {
         source={PromoImg}
         style={styles.promo}
         imageStyle={styles.promoInner}>
-        <AppText text="Ofertas de Promo" style={styles.promoTxt} />
+        <AppText text="Shipping Offers" style={styles.promoTxt} />
       </ImageBackground>
 
       <TouchableOpacity onPress={pseudoOnPress} style={styles.button}>

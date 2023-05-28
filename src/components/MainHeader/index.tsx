@@ -1,6 +1,6 @@
 import {Image, ImageBackground, View} from 'react-native';
-import Logo from '../../assets/images/LogisticAppLogo.png';
-import Bg from '../../assets/images/bg.png';
+import Logo from '@images/LogisticAppLogo.png';
+import Bg from '@images/bg.png';
 import styles from './styles';
 
 const MainHeader = () => {

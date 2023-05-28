@@ -1,13 +1,13 @@
 import {FC} from 'react';
 import {Platform, TextInput, View} from 'react-native';
-import AppText from '../AppText';
+import AppText from '@components/AppText';
 import styles from './styles';
 
 interface IField {
   value: string;
-  onChangeText: () => void;
+  onChangeText: (e: string) => void;
   placeholder: string;
-  label: string;
+  label?: string;
 }
 
 const Field: FC<IField> = ({value, onChangeText, placeholder, label}) => {

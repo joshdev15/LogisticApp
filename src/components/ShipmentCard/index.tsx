@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {IShipment} from '../../models';
-import AppText from '../AppText';
-import styles from './styles';
-import Arrived from '../../assets/svg/arrived';
-import Done from '../../assets/svg/done';
-import Ordered from '../../assets/svg/ordered';
-import Packaging from '../../assets/svg/packaging';
-import Way from '../../assets/svg/way';
 import {useNavigation} from '@react-navigation/native';
-import {ROUTES} from '../../constants/routes';
-import useAPI from '../../hooks/useAPI';
+import AppText from '@components/AppText';
+import useAPI from '@hooks/useAPI';
+import {ROUTES} from '@constants/routes';
+import {IShipment} from '@models';
+import Arrived from '@svg/arrived';
+import Done from '@svg/done';
+import Ordered from '@svg/ordered';
+import Packaging from '@svg/packaging';
+import Way from '@svg/way';
+import styles from './styles';
 
 export const currentIcon: any = {
   ordered: <Ordered width={25} height={25} />,

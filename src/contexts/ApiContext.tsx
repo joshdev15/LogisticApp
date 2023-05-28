@@ -1,6 +1,6 @@
 import {createContext, useState, FC} from 'react';
 import {Platform} from 'react-native';
-import {IApiContext, IContext, IShipment} from '../models';
+import {IApiContext, IContext, IShipment} from '@models';
 import {encode} from 'base-64';
 import {request, PERMISSIONS} from 'react-native-permissions';
 

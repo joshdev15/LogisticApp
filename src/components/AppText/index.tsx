@@ -1,10 +1,10 @@
-import {CSSProperties, FC} from 'react';
-import {Text, useColorScheme} from 'react-native';
+import {FC} from 'react';
+import {StyleProp, Text, TextStyle, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 interface IAppText {
   text: string;
-  style?: CSSProperties;
+  style?: StyleProp<TextStyle>;
 }
 
 const AppText: FC<IAppText> = ({text, style}) => {

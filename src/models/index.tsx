@@ -1,8 +1,9 @@
 import {ReactElement, Dispatch, SetStateAction} from 'react';
 
 export interface ILocation {
-  lat: number;
-  lng: number;
+  name: string;
+  latitude: number;
+  longitude: number;
 }
 
 export enum EStatus {
@@ -18,9 +19,7 @@ export interface IShipment {
   author: string;
   owner: string;
   cost: number;
-  origin: ILocation;
-  location: ILocation;
-  destination: ILocation;
+  ride: ILocation[];
   status: EStatus;
   id: string;
 }

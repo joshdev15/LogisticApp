@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {ScrollView, useColorScheme, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppStatusBar from '../../components/AppStatusBar';
@@ -10,10 +10,9 @@ import {ROUTES} from '../../constants/routes';
 import AppText from '../../components/AppText';
 import {currentIcon, ShipLine} from '../../components/ShipmentCard';
 import useAPI from '../../hooks/useAPI';
-import MapView, {Marker, Polyline} from 'react-native-maps';
-import WayLogo from '../../assets/images/truck.png';
+import EmptyState from '../../components/EmptyState';
 import styles from './styles';
-import {ILocation} from '../../models';
+import AppMap from '../../components/AppMap';
 
 const initialRegion = {
   latitude: 4.702429,
@@ -37,100 +36,37 @@ const DetailScreen = () => {
   };
 
   if (!currentShipment) {
-    return (
-      <View style={{...backgroundStyle, ...styles.emptyState}}>
-        <AppText text={"We can't find this shipment, sorry..."} />
-        <Button text="Back" onPress={goToHome} />
-      </View>
-    );
+    const emptyStyles = {...backgroundStyle, ...styles.emptyState};
+    return <EmptyState {...{style: emptyStyles, goToHome}} />;
   }
 
   useEffect(() => {
+    const ride = currentShipment.ride;
+    let location = ride.find(mark => mark.name === 'location');
+    if (!location) {
+      location = ride[0];
+    }
+
     setRegion({
-      latitude: currentShipment.location.lat,
-      longitude: currentShipment.location.lng,
+      latitude: location.latitude,
+      longitude: location.longitude,
       latitudeDelta: 0.07,
       longitudeDelta: 0.07,
     });
-
-    return () => {};
   }, [currentShipment]);
 
   const status = currentShipment.status.toString();
-  const {origin, location, destination} = currentShipment;
-  const markers = [
-    {name: 'origin', latitude: origin.lat, longitude: origin.lng},
-    {name: 'location', latitude: location.lat, longitude: location.lng},
-    {
-      name: 'destination',
-      latitude: destination.lat,
-      longitude: destination.lng,
-    },
-  ];
+  const {ride} = currentShipment;
 
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}
       style={backgroundStyle}>
       <AppStatusBar />
       <View style={styles.mapzone}>
         <View style={styles.mapCont}>
-          <MapView
-            style={{width: '100%', height: '100%'}}
-            userInterfaceStyle={isDarkMode ? 'dark' : 'light'}
-            zoomControlEnabled
-            region={region}>
-            {markers.map(mark => {
-              const {name, latitude, longitude} = mark;
-              return (
-                <Marker
-                  key={name}
-                  coordinate={{latitude, longitude}}
-                  {...(name === 'location' && {icon: WayLogo, image: WayLogo})}
-                />
-              );
-            })}
-
-            {/*
-            <Marker
-              coordinate={{
-                latitude: currentShipment.origin.lat,
-                longitude: currentShipment.origin.lng,
-              }}
-            />
-
-            <Marker
-              coordinate={{
-                latitude: currentShipment.location.lat,
-                longitude: currentShipment.location.lng,
-              }}
-              icon={WayLogo}
-              image={WayLogo}
-            />
-
-            <Marker
-              coordinate={{
-                latitude: currentShipment.destination.lat,
-                longitude: currentShipment.destination.lng,
-              }}
-            />
-            */}
-
-            <Polyline
-              coordinates={[
-                {
-                  latitude: currentShipment.location.lat,
-                  longitude: currentShipment.location.lng,
-                },
-                {
-                  latitude: currentShipment.destination.lat,
-                  longitude: currentShipment.destination.lng,
-                },
-              ]}
-              strokeColor="#000"
-              strokeWidth={8}
-            />
-          </MapView>
+          <AppMap markers={ride} region={region} />
         </View>
       </View>
 

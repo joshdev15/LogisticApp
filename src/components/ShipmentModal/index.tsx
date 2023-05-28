@@ -54,7 +54,12 @@ const ShipmentModal: FC<IShipmentModal> = ({open, closeModal}) => {
 
   const selectLocation = (e: MapPressEvent) => {
     const {coordinate} = e.nativeEvent;
-    setLocation({lat: coordinate.latitude, lng: coordinate.longitude});
+    setLocation({
+      name: 'destination',
+      latitude: coordinate.latitude,
+      longitude: coordinate.longitude,
+    });
+
     setRegion({
       ...initialRegion,
       latitude: coordinate.latitude,
@@ -100,17 +105,21 @@ const ShipmentModal: FC<IShipmentModal> = ({open, closeModal}) => {
       name,
       owner,
       cost: parseFloat(cost),
-      origin: {
-        lat: 4.711863,
-        lng: -74.0739219,
-      },
-      location: {
-        lat: 4.711863,
-        lng: -74.0739219,
-      },
-      destination: location,
       status: EStatus.ordered,
       author: 'me',
+      ride: [
+        {
+          name: 'origin',
+          latitude: 4.711863,
+          longitude: -74.0739219,
+        },
+        {
+          name: 'location',
+          latitude: 4.711863,
+          longitude: -74.0739219,
+        },
+        location,
+      ],
     });
 
     setDisabled(false);
@@ -140,8 +149,8 @@ const ShipmentModal: FC<IShipmentModal> = ({open, closeModal}) => {
               {location && (
                 <Marker
                   coordinate={{
-                    latitude: location.lat,
-                    longitude: location.lng,
+                    latitude: location.latitude,
+                    longitude: location.longitude,
                   }}
                 />
               )}

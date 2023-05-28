@@ -6,15 +6,15 @@ import {
   useColorScheme,
   TouchableOpacity,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AppText from '../AppText';
 import MapView, {MapPressEvent, Marker} from 'react-native-maps';
-import styles from './styles';
-import {EStatus, ILocation, IShipment} from '../../models';
-import Field from '../Field';
-import Button from '../Button';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {encode} from 'base-64';
-import useAPI from '../../hooks/useAPI';
+import AppText from '@components/AppText';
+import Field from '@components/Field';
+import Button from '@components/Button';
+import useAPI from '@hooks/useAPI';
+import {EStatus, ILocation, IShipment} from '@models';
+import styles from './styles';
 
 interface IShipmentModal {
   open: boolean;

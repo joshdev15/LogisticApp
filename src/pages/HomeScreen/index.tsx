@@ -1,14 +1,14 @@
+import {useEffect, useState} from 'react';
 import {ScrollView, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AppStatusBar from '../../components/AppStatusBar';
-import Section from '../../components/Section';
-import MainHeader from '../../components/MainHeader';
-import ViewTitle from '../../components/ViewTitle';
-import ShipmentList from '../../components/ShipmentList';
-import {useEffect, useState} from 'react';
-import useAPI from '../../hooks/useAPI';
-import NewShipmentButton from '../../components/NewShipmentButton';
-import ShipmentModal from '../../components/ShipmentModal';
+import AppStatusBar from '@components/AppStatusBar';
+import Section from '@components/Section';
+import MainHeader from '@components/MainHeader';
+import ViewTitle from '@components/ViewTitle';
+import ShipmentList from '@components/ShipmentList';
+import NewShipmentButton from '@components/NewShipmentButton';
+import ShipmentModal from '@components/ShipmentModal';
+import useAPI from '@hooks/useAPI';
 
 const HomeScreen = () => {
   const {welcome} = useAPI();
@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     welcome();
-  }, []);
+  }, [welcome]);
 
   return (
     <ScrollView

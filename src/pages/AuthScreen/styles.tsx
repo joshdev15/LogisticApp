@@ -10,10 +10,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   warning: {
+    margin: 10,
     backgroundColor: '#ffd70090',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     padding: 20,
+    borderRadius: 10,
   },
 });
 

@@ -2,15 +2,15 @@ import {useEffect, useState} from 'react';
 import {ScrollView, TouchableOpacity, useColorScheme, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Section from '../../components/Section';
-import MainHeader from '../../components/MainHeader';
-import ViewTitle from '../../components/ViewTitle';
-import Field from '../../components/Field';
-import Button from '../../components/Button';
-import AppText from '../../components/AppText';
-import useAPI from '../../hooks/useAPI';
+import Section from '@components/Section';
+import MainHeader from '@components/MainHeader';
+import ViewTitle from '@components/ViewTitle';
+import Field from '@components/Field';
+import Button from '@components/Button';
+import AppText from '@components/AppText';
+import useAPI from '@hooks/useAPI';
+import {ROUTES} from '@constants/routes';
 import styles from './styles';
-import {ROUTES} from '../../constants/routes';
 
 const AuthScreen = () => {
   const {auth, isLogin, forceAuth} = useAPI();
@@ -52,7 +52,9 @@ const AuthScreen = () => {
         <ViewTitle value="Login" />
         <MainHeader />
         <View style={styles.warning}>
-          <AppText text='Temporaly you only can login with user "admin" and the passwork "admin"' />
+          <AppText text="Temporaly you only can login with" />
+          <AppText text='* User: "admin"' />
+          <AppText text='* Password: "admin"' />
         </View>
 
         <Field

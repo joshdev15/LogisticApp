@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {TouchableOpacity} from 'react-native';
-import AppText from '../AppText';
+import AppText from '@components/AppText';
 import styles from './styles';
 
 interface IButton {

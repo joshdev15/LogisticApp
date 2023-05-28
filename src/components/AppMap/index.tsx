@@ -2,7 +2,7 @@ import {FC} from 'react';
 import MapView, {Marker, Polyline, Region} from 'react-native-maps';
 import {useColorScheme} from 'react-native';
 import {ILocation} from '../../models';
-import Truck from '../../assets/images/truck.png';
+import Truck from '@images/truck.png';
 import {encode} from 'base-64';
 
 interface IAppMap {

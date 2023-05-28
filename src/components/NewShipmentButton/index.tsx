@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
-import Ship from '../../assets/svg/ship';
-import PromoImg from '../../assets/images/promo.png';
-import AppText from '../AppText';
+import AppText from '@components/AppText';
+import useAPI from '@hooks/useAPI';
+import Ship from '@svg/ship';
+import PromoImg from '@images/promo.png';
 import styles from './styles';
-import useAPI from '../../hooks/useAPI';
 
 interface INewShipmentButton {
   onPress: () => void;

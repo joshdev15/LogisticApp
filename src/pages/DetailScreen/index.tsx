@@ -1,18 +1,19 @@
-import {FC, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ScrollView, useColorScheme, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AppStatusBar from '../../components/AppStatusBar';
-import Button from '../../components/Button';
-import Section from '../../components/Section';
 import {useNavigation} from '@react-navigation/native';
-import ViewTitle from '../../components/ViewTitle';
-import {ROUTES} from '../../constants/routes';
-import AppText from '../../components/AppText';
-import {currentIcon, ShipLine} from '../../components/ShipmentCard';
-import useAPI from '../../hooks/useAPI';
-import EmptyState from '../../components/EmptyState';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AppStatusBar from '@components/AppStatusBar';
+import Button from '@components/Button';
+import Section from '@components/Section';
+import ViewTitle from '@components/ViewTitle';
+import {ROUTES} from '@constants/routes';
+import AppText from '@components/AppText';
+import EmptyState from '@components/EmptyState';
+import AppMap from '@components/AppMap';
+import {currentIcon, ShipLine} from '@components/ShipmentCard';
+import useAPI from '@hooks/useAPI';
 import styles from './styles';
-import AppMap from '../../components/AppMap';
+import {ILocation} from '@models';
 
 const initialRegion = {
   latitude: 4.702429,
@@ -42,7 +43,7 @@ const DetailScreen = () => {
 
   useEffect(() => {
     const ride = currentShipment.ride;
-    let location = ride.find(mark => mark.name === 'location');
+    let location = ride.find((mark: ILocation) => mark.name === 'location');
     if (!location) {
       location = ride[0];
     }

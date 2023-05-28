@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
-import Button from '../../components/Button';
-import AppText from '../../components/AppText';
+import Button from '@components/Button';
+import AppText from '@components/AppText';
 
 interface IEmptyState {
   goToHome: any;

@@ -1,6 +1,6 @@
 import {useContext} from 'react';
-import {ApiContext} from '../contexts/ApiContext';
-import {IApiContext} from '../models';
+import {ApiContext} from '@contexts/ApiContext';
+import {IApiContext} from '@models';
 
 const useAPI = () => {
   const {
